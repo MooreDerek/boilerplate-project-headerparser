@@ -5,6 +5,7 @@
 require('dotenv').config();
 var express = require('express');
 var app = express();
+//app.set('trust proxy', 1);
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
@@ -22,12 +23,14 @@ app.get("/", function (req, res) {
 
 // your first API endpoint... 
 app.get("/api/whoami", function (req, res) {
-  res.json({ipadress: req.get('x-forwarded-for') || req.ip, language: req.get("accept-language") , software: req.get("user-agent")});
+  console.log(req.connection.remoteAddress, req.ip, req.ips,req.headers['x-forwarded-for']);
+  console.dir(req.headers);
+  res.json({ipaddress: req.ip, language: req.get("accept-language") , software: req.get("user-agent")});
 });
 
 
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, "0.0.0.0", function () {
+var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
