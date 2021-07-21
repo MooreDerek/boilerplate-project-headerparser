@@ -28,6 +28,6 @@ app.get("/api/whoami", function (req, res) {
 
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
+var listener = app.listen(process.env.PORT, "0.0.0.0", function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
